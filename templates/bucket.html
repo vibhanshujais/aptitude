@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+<style>
+        body{
+        margin: 0;
+        }
+        #container {
+            display: flex;
+        }
+        #sidebar {
+            background-color: #333;
+            color: #fff;
+            width: 300px;
+            padding: 20px;
+            box-sizing: border-box;
+            transition: width 0.3s;
+        }
+        #content {
+            flex-grow: 1;
+            padding: 20px;
+            box-sizing: border-box;
+        }
+        #nav-toggle {
+            display: none;
+        }
+        #sidebar ul li{
+            list-style: none;
+        }
+        img{
+            border: 1px black solid;
+            width: 90%;
+        }
+        ul{
+            list-style: disc;
+        }
+        li{
+            padding-bottom: 10px ;
+        }
+        a{
+            text-decoration: none;
+            color: white;
+        }
+        @media screen and (max-width: 768px) {
+            #sidebar {
+                width: 0;
+                overflow: hidden;
+                background-color: white;
+            }
+            #content {
+                width: 100%;
+            }
+            #sidebar.active {
+                width: 400px;
+                border: black solid 1px;
+            }
+            #nav-toggle {
+                color: black;
+                display: block;
+                cursor: pointer;
+                position:fixed;
+                top: 20px;
+                left: 20px;
+                margin-top: 30px;
+                z-index: 2;
+            }
+            a{
+                color: black;
+            }
+        }
+</style>
+<body>
+    {% include 'header.html' %}
+<div id="container">
+    <div id="sidebar">
+        <ul>
+            {% for i in key %}
+                <a href="/algorithm/{{i.name}}">
+                    <li>{{i.name}}</li>
+                </a>
+                <hr>
+            {% endfor %}
+        </ul>
+    </div>
+    <div id="content">
+        <h1>Counting Sort</h1>
+        <hr>
+        <h3>What is Bucket Sort?</h3>
+        <p>Bucket Sort is a sorting algorithm that distributes the elements of an array into a number of buckets. Each bucket is then sorted, either using a different sorting algorithm or by recursively applying the bucket sort algorithm. The choice of sorting algorithm within the bucket depends on various factors, such as the nature of the data.</p>
+        <h3>How Bucket Sort works?</h3>
+        <ol>
+            <li><b>Determine the range:</b></li>
+            <ul>
+                <li>Determine the range of the input elements (minimum and maximum values).</li>
+            </ul>
+            <li><b>Create Bucekts:</b></li>
+            <ul>
+                <li>Divide the range into k equal-sized intervals or buckets, where k is the number of buckets.</li>
+            </ul>
+            <li><b>Distribute elements:</b></li>
+            <ul>
+                <li>Iterate through the input array and place each element into its corresponding bucket based on its value.</li>
+            </ul>
+            <li><b>Sort each bucket:</b></li>
+            <ul>
+                <li>Sort each bucket individually. This can be done using another sorting algorithm, such as insertion sort, quicksort, or any other suitable sorting method.</li>
+            </ul>
+            <li><b>Concatenate buckets:</b></li>
+            <ul>
+                <li>Concatenate the sorted buckets to obtain the final sorted array.</li>
+            </ul>
+        </ol>
+        <h3>Example:</h3>
+        <p>Consider the following array of numbers:
+            [0.72,0.37,0.54,0.93,0.26,0.16,0.42,0.21,0.18,0.89]</p>
+        <ol>
+            <li><b>Determine the range:</b></li>
+            <ul>
+                <li>In this case, the range of values is from 0.16 to 0.93.</li>
+            </ul>
+            <li><b>Create buckets:</b></li>
+            <ul>
+                <li>Let's say we decide to use 5 buckets. Each bucket will represent a range of values.</li>
+                <li>Bucket 1: [0.1 - 0.3]</li>
+                <li>Bucket 2: [0.31 - 0.5]</li>
+                <li>Bucket 3: [0.51 - 0.7]</li>
+                <li>Bucket 4: [0.71 - 0.9]</li>
+                <li>Bucket 5: [0.91 - 1.0]</li>
+            </ul>
+            <li><b>Distribute elements:</b></li>
+            <ul>
+                <li>Place each element into its corresponding bucket based on its value.</li>
+                <li>Bucket 1: [0.26, 0.21, 0.18]</li>
+                <li>Bucket 2: [0.37, 0.42, 0.54]</li>
+                <li>Bucket 3: []</li>
+                <li>Bucket 4: [0.72]</li>
+                <li>Bucket 5: [0.93, 0.89, 1.0]</li>
+            </ul>
+            <li><b>Sort each edges:</b></li>
+            <ul>
+                <li>Sort each bucket individually. Any sorting algorithm can be used.</li>
+                <li>Bucket 1: [0.18, 0.21, 0.26]</li>
+                <li>Bucket 2: [0.37, 0.42, 0.54]</li>
+                <li>Bucket 3: []</li>
+                <li>Bucket 4: [0.72]</li>
+                <li>Bucket 5: [0.89, 0.93, 1.0]</li>
+            </ul>
+            <li><b>Concatenate buckets:</b></li>
+            <ul>
+                <li>Concatenate the sorted buckets to obtain the final sorted array.</li>
+                <li>[0.18, 0.21, 0.26, 0.37, 0.42, 0.54, 0.72, 0.89, 0.93, 1.0]</li>
+            </ul>
+        </ol>
+        <h3>Complexity Analysis:</h3>
+        <h4>Time Complexity:</h4>
+        <ul>
+            <li><b>Average Case:</b>
+            <ul>
+                <li>The process of distributing the elements into buckets takes 
+                    O(n) time, and if each bucket has k elements, and there are m buckets, sorting each bucket takes 
+                    
+                    O(klogk). Therefore, the average time complexity is approximately 
+                    
+                    O(n+m⋅klogk).</li>
+            </ul></li>
+            <li><b>Worst Case:</b>
+            <ul>
+                <li> If all elements end up in a single bucket, the time complexity becomes dominated by the sorting of that single bucket, resulting in a worst-case time complexity of O(n2<sup>2</sup>). </li>
+            </ul></li>
+            <li><b>Best Case:</b>
+            <ul>
+                <li>The best-case time complexity occurs when each element is evenly distributed into buckets, and each bucket contains a small number of elements. In this case, the time complexity is close to linear, approximately O(n+m⋅k).</li>
+            </ul></li>
+        </ul>
+        <h4>Space Complexity:</h4>
+        <ul>
+            <li>The space complexity of Bucket Sort is O(n+m), where n is the number of elements in the input array, and m is the number of buckets.</li>
+        </ul>
+        <h3>Advantages:</h3>
+        <ul>
+            <li>Bucket Sort is relatively simple to understand and implement, making it accessible for those new to sorting algorithms.</li>
+            <li>When the input data is uniformly distributed across the buckets, Bucket Sort can be very efficient. In such cases, the average time complexity is linear, and the sorting within each bucket is typically faster.</li>
+            <li>Bucket Sort can be adapted for external sorting, where the data to be sorted is too large to fit into the main memory. </li>
+        </ul>
+        <h3>Disadvantages:</h3>
+        <ul>
+            <li>Depending on the implementation, Bucket Sort may need additional sorting algorithms within each bucket.</li>
+            <li>The performance of Bucket Sort is highly sensitive to the distribution of input data. If the data is not evenly distributed across buckets, or if a large number of elements end up in a single bucket, the performance may degrade.</li>
+            <li>While the space complexity is generally considered efficient, Bucket Sort does require additional space for the buckets themselves.</li>
+        </ul>
+
+    </div>
+
+    <div id="nav-toggle">&#9776;</div>
+</div>
+
+<script>
+    document.getElementById('nav-toggle').addEventListener('click', function () {
+        document.getElementById('sidebar').classList.toggle('active');
+    });
+</script>
+</body>
+</html>

@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+<style>
+        body{
+            margin: 0;
+            overflow-x: hidden;
+        }
+        #container {
+            display: flex;
+        }
+        #sidebar {
+            background-color: #333;
+            color: #fff;
+            width: 300px;
+            padding: 20px;
+            box-sizing: border-box;
+            transition: width 0.3s;
+        }
+        #content {
+            flex-grow: 1;
+            padding: 20px;
+            box-sizing: border-box;
+        }
+        #nav-toggle {
+            display: none;
+        }
+        ul{
+            list-style: disc;
+        }
+        li{
+            padding-bottom: 10px ;
+        }
+        a{
+            text-decoration: none;
+            color: white;
+        }
+        #sidebar ul li{
+            list-style: none;
+        }
+        img{
+            border: solid 1px black;
+            width: 90%;
+        }
+        @media screen and (max-width: 768px) {
+            #sidebar {
+                width: 0;
+                overflow:hidden;
+                background-color: white;
+            }
+            #content {
+                width: 50%;
+            }
+            #sidebar.active {
+                width: 90%;
+                border: black solid 1px;
+            }
+            #nav-toggle {
+                color: black;
+                display: block;
+                cursor: pointer;
+                position:fixed;
+                top: 20px;
+                left: 20px;
+                margin-top: 30px;                
+            }
+            a{
+                color: black;
+            }
+        }
+</style>
+<body>
+    
+    {% include 'header.html' %}
+<div id="container">
+    <div id="sidebar">
+        <ul>
+            {% for i in key %}
+                <a href="/algorithm/{{i.name}}">
+                    <li>{{i.name}}</li>
+                </a>
+                <hr>
+            {% endfor %}
+        </ul>
+    </div>
+
+    <div id="content">
+        <h1>Linear Search</h1>
+        <hr>
+        <h3>What is Linear Search?</h3>
+        <p>Linear search, also known as sequential search, is a simple method for finding a specific value within a list.
+            Imagine you have a list of items, and you want to find the position of a particular item in that list. 
+            Linear search checks each element of the list one by one until it finds the target element or reaches the end of the list.</p>
+        <h3>How does Linear Search works?</h3>
+        <ol>
+            <li><b>Start from the beginning.</b></li>
+            <ul>
+                <li>Imagine you have a list of items, like a shopping list.</li>
+                <li>To find a specific item, you start at the beginning of the list.</li>
+            </ul>
+            <li><b>Check each element.</b></li>
+            <ul>
+                <li>You go through each item one by one, starting from the first.</li>
+                <li>Compare each item with the one you're looking for.</li>
+            </ul>
+            <li><b>Stop when you find it.</b></li>
+            <ul>
+                <li>If the current item matches what you're looking for, you stop searching.</li>
+                <li>You note the position or index of the item in the list.</li>
+            </ul>
+            <li><b>End of list</b></li>
+            <ul>
+                <li>If you go through the entire list and don't find the item, you know it's not there.</li>
+            </ul>
+        </ol>
+        <h3>Example:</h3>
+        <p>Consider the following list: [3, 1, 4, 1, 5, 9, 2, 6, 5, 3, 5], and you want to find the position of the number 2.</p>
+        <ol>
+            <li>Start from the beginning of the list.</li>
+            <li>Check the first element: 3 - not a match.</li>
+            <li>Move to the next element: 1 - not a match.</li>
+            <li>Next: 4 - still no match.</li>
+            <li>Continue this process until you find 2.</li>
+        </ol>
+        <h3>Visualization of Linear Search:</h3>
+        <img src="https://slaystudy.com/wp-content/uploads/2020/05/linearsearchitr.gif" alt="">
+        <h3>Complexity Analysis:</h3>
+         <h4>Time Complexity:</h4>
+         <ul>
+            <li><b>Best Case:</b>In the best case, the key might be present at the first index. 
+                So the best case complexity is O(1)</li>
+            <li><b>Worst Case:</b>In the worst case, the key might be present at the last index i.e., opposite to the end from which the search has started in the list.
+                 So the worst-case complexity is O(N) where N is the size of the list.</li>
+            <li><b>Average Case:</b>O(N)</li>
+         </ul>
+         <h4>Space Complexity:</h4>
+         <ul><li>O(1) as except for the variable to iterate through the list, 
+            no other variable is used.</li></ul>
+
+        <h3>Advantages:</h3>
+            <ul>
+                <li>Linear search can be used irrespective of whether the array is sorted or not. It can be used on arrays of any data type.</li>
+                <li>Does not require any additional memory.</li>
+                <li>It is a well-suited algorithm for small datasets.</li>
+            </ul>
+        <h3>Disadvantages:</h3>
+        <ul>
+            <li>has a time complexity of O(N), which in turn makes it slow for large datasets.</li>
+        </ul>
+    </div>
+
+    <div id="nav-toggle">&#9776;</div>
+</div>
+
+<script>
+    document.getElementById('nav-toggle').addEventListener('click', function () {
+        document.getElementById('sidebar').classList.toggle('active');
+    });
+</script>
+</body>
+</html>

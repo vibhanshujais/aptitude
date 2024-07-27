@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+<style>
+    body{
+        margin: 0;
+    }
+        #container {
+            display: flex;
+        }
+        #sidebar {
+            background-color: #333;
+            color: #fff;
+            width: 300px;
+            padding: 20px;
+            box-sizing: border-box;
+            transition: width 0.3s;
+        }
+
+        #content {
+            flex-grow: 1;
+            padding: 20px;
+            box-sizing: border-box;
+        }
+
+        #nav-toggle {
+            display: none;
+        }
+        ul{
+            list-style: disc;
+        }
+        li{
+            padding-bottom: 10px ;
+        }
+        a{
+            text-decoration: none;
+            color: white;
+        }
+        img{
+            border: solid 1px black;
+            width: 90%;
+        }
+        #sidebar ul li{
+            list-style: none;
+        }
+
+        @media screen and (max-width: 768px) {
+            #sidebar {
+                width: 0;
+                overflow: hidden;
+                background-color: white;
+            }
+
+            #content {
+                width: 50%;
+            }
+
+            #sidebar.active {
+                width: 400px;
+                border: black solid 1px;
+            }
+
+            #nav-toggle {
+                color: black;
+                display: block;
+                cursor: pointer;
+                position:fixed;
+                top: 20px;
+                left: 20px;
+                z-index: 2;
+                margin-top: 30px;
+                overflow: scroll;
+            }
+            a{
+                color: black;
+            }
+        }
+</style>
+<body>
+    {% include 'header.html' %}
+<div id="container">
+    <div id="sidebar">
+        <ul>
+            {% for i in key %}
+                <a href="/algorithm/{{i.name}}">
+                    <li>{{i.name}}</li>
+                </a>
+                <hr>
+            {% endfor %}
+        </ul>
+    </div>
+
+    <div id="content">
+        <h1>Floyd-Warshall Algorithm </h1>
+        <hr>
+        <h3>What is Floyd-Warshall Algorithm?</h3>
+        <p>The Floyd-Warshall algorithm is an algorithm for finding the shortest paths between all pairs of vertices in a weighted graph, including graphs with negative weight edges. It does so by considering all possible intermediate vertices along the paths. The algorithm was proposed by Robert Floyd in 1962 and independently by Stephen Warshall in 1962.</p>
+        <h3>How does Floyd-Warshall Algorithm works?</h3>
+        <ol>
+            <li><b>Initialization:</b></li>
+            <ul>
+                <li>For each pair of vertices i and j, initialize the distance matrix D such that D[i][j] is the weight of the edge from vertex i to vertex j if there is an edge, and ∞ otherwise.</li>
+                <li>
+                    Set D[i][i]=0 for all vertices i.</li>
+            </ul>
+            <li><b>Main Loop:</b></li>
+                <ul>
+                    <li>For each intermediate vertex k, 
+                        iterate through all pairs of vertices i and j and update 
+                        D[i][j] if the path from i to j through 
+                        k is shorter than the current value of D[i][j].</li>
+                    <li>The update rule is: D[i][j]=min(D[i][j],D[i][k]+D[k][j]).</li>
+                </ul>
+            <li><b>Result:</b></li>
+            <ul>
+                <li>After the algorithm completes, the matrix D will contain the shortest distances between all pairs of vertices.</li>
+            </ul>
+        </ol>
+        <h3>Example:</h3>
+        <img src="https://www.programming-algorithms.net/latexImage/id/51068" alt="">
+        <h3>Visualization of Djikstra's Algorithm:</h3>
+        <h3>Complexity Analysis:</h3>
+    <h4>Time Complexity:</h4>
+    <ul>
+        <li>The time complexity of the Floyd-Warshall algorithm is O(V<sup>3</sup> ) where V is the number of vertices in the graph.</li>
+    </ul>
+    <h4>Space Complexity:</h4>
+    <ul>
+        <li>The space complexity is O(V<sup>2</sup> ) for storing the distance matrix.</li>
+    </ul>
+    <h3>Advantages:</h3>
+    <ul>
+        <li>Handles both positive and negative weight edges.</li>
+        <li>Can handle graphs with negative cycles.</li>
+        <li>Suitable for dense graphs where the number of edges is close to V <sup>2</sup>.</li>
+    </ul>
+    <h3>Disadvantages:</h3>
+    <ul>
+        <li>Inefficient for large graphs due to its cubic time complexity.</li>
+        <li>Typically not as fast as specialized algorithms (e.g., Dijkstra's or Bellman-Ford) for specific cases.</li>
+    </ul>
+    </div>
+
+
+    <div id="nav-toggle">&#9776;</div>
+</div>
+
+<script>
+    document.getElementById('nav-toggle').addEventListener('click', function () {
+        document.getElementById('sidebar').classList.toggle('active');
+    });
+</script>
+</body>
+</html>

@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vibhanshu Jaiswal</title>
+    <meta name="keywords" content="dfs, algo, algorithms, dsa algorihtm, depth first search">
+    <style>
+        body{
+            margin: 0;
+        }
+            #container {
+                display: flex;
+            }
+            #sidebar {
+                background-color: #333;
+                color: #fff;
+                width: 300px;
+                padding: 20px;
+                box-sizing: border-box;
+                transition: width 0.3s;
+            }
+    
+            #content {
+                flex-grow: 1;
+                padding: 20px;
+                box-sizing: border-box;
+            }
+    
+            #nav-toggle {
+                display: none;
+            }
+            ul{
+                list-style: disc;
+            }
+            li{
+                padding-bottom: 10px ;
+            }
+            a{
+                text-decoration: none;
+                color: white;
+            }
+            img{
+                border: solid 1px black;
+                width: 40%;
+                height: 10%;
+            }
+            #sidebar ul li{
+                list-style: none;
+            }
+    
+            @media screen and (max-width: 768px) {
+                #sidebar {
+                    width: 0;
+                    overflow: hidden;
+                    background-color: white;
+                }
+    
+                #content {
+                    width: 50%;
+                }
+    
+                #sidebar.active {
+                    width: 400px;
+                    border: black solid 1px;
+                }
+    
+                #nav-toggle {
+                    color: black;
+                    display: block;
+                    cursor: pointer;
+                    position:fixed;
+                    top: 20px;
+                    left: 20px;
+                    z-index: 2;
+                    margin-top: 30px;
+                }
+                a{
+                    color: black;
+                }
+                img{
+                    width: 90%;
+                }
+            }
+    </style>
+</head>
+<body>
+    {% include 'header.html' %}
+    <div id="container">
+        <div id="sidebar">
+            <ul>
+                {% for i in key %}
+                    <a href="/algorithm/{{i.name}}">
+                        <li>{{i.name}}</li>
+                    </a>
+                    <hr>
+                {% endfor %}
+            </ul>
+        </div>
+    
+        <div id="content">
+            <h1>DFS</h1>
+            <hr>
+            <h3>What is DFS?</h3>
+            <p>Depth-First Search (DFS) is another graph traversal algorithm used to explore all the vertices of a graph. Unlike BFS, DFS explores as far as possible along one branch before backtracking. It can be implemented using either recursion or an explicit stack.</p>
+            <h3>How DFS algorithm works?</h3>
+            <ol>
+                <li><b>Initialization:</b></li>
+                <ul>
+                    <li>Create a stack (or use recursion).</li>
+                    <li>Mark all vertices as not visited.</li>
+                </ul>
+                <li><b>Choose a starting vertex:</b></li>
+                <ul>
+                    <li>Choose a starting vertex (source) and mark it as visited.</li>
+                    <li>Push the starting vertex onto the stack (or use recursion).</li>
+                </ul>
+                <li><b>Explore neighbours:</b></li>
+                <ul>
+                    <li>While the stack is not empty (or while recursion continues), do the following:</li>
+                    <ul>
+                        <li>Pop a vertex from the stack (or get the current vertex in the recursive call).</li>
+                        <li>Process the popped vertex.</li>
+                        <li>Push all adjacent vertices that haven't been visited yet onto the stack (or make recursive calls for unvisited neighbors).</li>
+                        <li>Mark each newly pushed vertex as visited.</li>
+                    </ul>
+                </ul>
+                <li><b>Termination:</b></li>
+                <ul>
+                    <li>Continue the process until the stack is empty (or until recursion completes).</li>
+                </ul>
+            </ol>
+            <h3>Example:</h3>
+            <p>Consider this graph:</p>
+           <pre>
+             A
+            / \
+           B   C
+          / \   \
+         D   E   F
+        </pre>
+        <ol>
+            <li><b>Initialization:</b></li>
+            <ul>
+                <li>Stack: empty</li>
+                <li>Visited: [false, false, false, false, false, false]</li>
+            </ul>
+            <li><b>Starting Vertex:</b></li>
+            <ul>
+                <li>Choose A as the starting vertex.</li>
+                <li>Push A onto the stack, mark A as visited.</li>
+            </ul>
+            <li><b>Explore neighbors:</b></li>
+            <ul>
+                <li>Pop A, process A.</li>
+                <li>Push B and C onto the stack.</li>
+                <li>Visited: [true, false, false, false, false, false]</li>
+                <li>Pop B, process B.</li>
+                <li>Push D and E onto the stack.</li>
+                <li>Visited: [true, true, false, false, false, false]</li>
+                <li>Pop D, process D.</li>
+                <li>No new vertices to push.</li>
+                <li>Visited: [true, true, false, true, false, false]</li>
+                <li>Pop E, process E.</li>
+                <li>No new vertices to push.</li>
+                <li>Visited: [true, true, false, true, true, false]</li>
+                <li>Pop C, process C.</li>
+                <li>Push F onto the stack.</li>
+                <li>Visited: [true, true, true, true, false, false]</li>
+                <li>Pop F, process F.</li>
+                <li>No new vertices to push.</li>
+                <li>Visited: [true, true, true, true, true, true]</li>
+            </ul>
+            <li><b>Termination:</b></li>
+            <ul>
+                <li>Continue until the stack is empty.</li>
+            </ul>
+        </ol>
+        <h3>Visualization of BFS:</h3>
+        <img src="https://upload.wikimedia.org/wikipedia/commons/7/7f/Depth-First-Search.gif" alt="DFS">
+        <h3>Complexity Analysis:</h3>
+        <h4>Time Complexity: </h4>
+        <ul>
+            <li>The time complexity of DFS is also O(V + E), where V is the number of vertices, and E is the number of edges.</li>
+        </ul>
+        <h4>Space Complexity:</h4>
+        <ul>
+            <li>The space complexity is O(V) due to the stack.</li>
+        </ul>
+        <h3>Advantages:</h3>
+        <ul>
+            <li>DFS is often preferred in certain scenarios, such as topological sorting, where the order of exploration matters.</li>
+            <li>Memory requirements can be lower compared to BFS in some cases.</li>
+        </ul>
+        <h3>Disadvantages:</h3>
+        <ul>
+            <li>It may not find the shortest path in unweighted graphs.</li>
+            <li>It may get stuck in infinite loops if not properly implemented or if the graph has cycles.</li>
+        </ul>
+
+            <div id="nav-toggle">&#9776;</div>
+        </div>
+    </div>
+    <script>
+        document.getElementById('nav-toggle').addEventListener('click', function () {
+            document.getElementById('sidebar').classList.toggle('active');
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background-color: #111;
+            color: white;
+        }
+
+        .header {
+            background-color: #333;
+            height: 10%;
+            padding: 2%;
+            color: white;
+            text-align: center;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 24px;
+        }
+
+        .logo img{
+            height: 50px;
+            width: 50px;
+            border-radius: 10px;
+        }
+
+        .nav {
+            display: flex;
+            list-style: none;
+        }
+
+        .nav a {
+            color: white;
+            text-decoration: none;
+            font-size: x-large;
+            padding: 8px 16px;
+            transition: background-color 1.5s;
+        }
+
+        .nav a:hover {
+            background-color: #555;
+            color: white;
+        }
+
+        footer {
+        background-color: black;
+        color: white;
+        padding: 20px 0;
+        font-size:larger;
+        text-align:left;
+        clear:both;
+        bottom:0;
+        }
+
+        .footer-container {
+        display: flex;
+        justify-content: space-around;
+        max-width: 1200px;
+        margin: 0 auto;
+        display:flex
+        }
+
+        .footer-column {
+        flex: 1;
+        text-align: center;
+        }
+
+        h3 {
+            font-size: 1.5em;
+            margin-bottom: 10px;
+        }
+
+        .social-icons {
+            display: flex;
+            justify-content: space-around;
+        }
+
+        .icon-link {
+            color: #fff;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+
+        .icon-link:hover {
+            color: #ffcc00;
+        }
+
+        #newsletter-form {
+            margin-top: 10px;
+        }
+
+        #newsletter-form input {
+            padding: 8px;
+            width: 70%;
+            color:white;
+        }
+
+        #newsletter-form button {
+            padding: 8px;
+            background-color: #ffcc00;
+            color: #333;
+            border: none;
+            cursor: pointer;
+        }
+
+        #newsletter-form button:hover {
+            background-color: #333;
+            color: #fff;
+        }
+
+        .section{
+            color: black;
+            text-align: left;
+            background-color: #ffffff;
+            width: 90%;
+            float:left;
+            padding-left: 10px;
+            padding-right: 10px;
+            margin: 2% 5% 1% 5% ;
+            border-radius: 10px;
+            box-shadow: 0px 0px 5px 3px rgb(232, 212, 212);
+        }
+
+        @media screen and (max-width: 1800px){
+            .nav{
+                margin: 0%;
+            }
+        }
+
+        @media screen and (max-width: 900px){
+            .section{
+                width: 90%;
+                margin: 5%;
+                transition: ease-in-out;
+            }
+
+            .nav a{
+                font-size: large;
+            }
+
+        }
+
+        @media screen and (max-width: 700px) {
+
+            .header {
+                flex-direction: column;
+                height: 200px;
+            }
+
+            .nav {
+                margin: 0% 20% 0% 0%;
+            }
+
+            .nav a {
+                display: block;
+                width: 100%;
+                padding: 5px 0;
+                margin: 0px 10% 0px 10%;
+                font-size: large;
+            }
+
+            .footer-container{
+                flex-direction: column;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header class="header">
+        <div class="logo">
+            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ0DEO3I_3s57ZYc4cRJEM7zarJP0fj_KedDDUzowztKw&s" alt="">
+        </div>
+        <nav class="nav">
+            <a href="/">Home</a>
+            <a href="#">About</a>
+            <a href="#footer-container">Contact</a>
+            <a href="blogs">Blogs</a>
+        </nav>
+    </header>
+
+    <section class="section">
+        <h2>is</h2>
+    </section>
+
+    <footer>
+        <div class="footer-container">
+            <div class="footer-column">
+                <h3>Contact Us</h3>
+                <p><i class="fa fa-envelope"></i> vibhanshujaiswal28@gmail.com</p>
+                <p><i class="fa fa-phone"></i> +91 9971497473</p>
+            </div>
+            <div class="footer-column">
+                <h3>Follow Us</h3>
+                <div class="social-icons">
+                    <a href="https://www.facebook.com/" class="icon-link"><i class="fa fa-facebook"></i></a>
+                    <a href="https://www.twitter.com/VibhanshuJ9" class="icon-link"><iclass="fa fa-twitter"></i></a>
+                    <a href="https://www.instagram.com/luckyjaiswal3832" class="icon-link"><i class="fa fa-instagram"></i></a>
+                </div>
+            </div>
+            <div class="footer-column">
+                <h3>Newsletter</h3>
+                <p>Subscribe to our newsletter for updates.</p>
+                <form id="newsletter-form">
+                    <input type="email" placeholder="Your Email" required>
+                    <button type="submit">Subscribe</button>
+                </form>
+            </div>
+        </div>
+    </footer>
+</body>
+</html>

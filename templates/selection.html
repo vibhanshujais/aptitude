@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+<style>
+    body{
+        margin: 0;
+    }
+        #container {
+            display: flex;
+        }
+
+        #sidebar {
+            background-color: #333;
+            color: #fff;
+            width: 300px;
+            padding: 20px;
+            box-sizing: border-box;
+            transition: width 0.3s;
+        }
+
+        #content {
+            flex-grow: 1;
+            padding: 20px;
+            box-sizing: border-box;
+        }
+
+        #nav-toggle {
+            display: none;
+        }
+        img{
+            border: solid 1px black;
+            width: 90%;
+        }
+
+        ul{
+            list-style: disc;
+        }
+        li{
+            padding-bottom: 10px ;
+        }
+        #sidebar ul li{
+            list-style-type: none;
+        }
+        a{
+            text-decoration: none;
+            color: white;
+        }
+        @media screen and (max-width: 768px) {
+            #sidebar {
+                width: 0;
+                overflow: hidden;
+                background-color: white;
+            }
+
+            #content {
+                width: 50%;
+            }
+
+            #sidebar.active {
+                width: 400px;
+                border: black solid 1px;
+            }
+
+            #nav-toggle {
+                color: black;
+                display: block;
+                cursor: pointer;
+                position:fixed;
+                top: 20px;
+                left: 20px;
+                z-index: 2;
+                margin-top: 30px;
+            }
+            a{
+                color: black;
+            }
+        }
+</style>
+<body>
+    {% include 'header.html' %}
+<div id="container">
+    <div id="sidebar">
+        <ul>
+            {% for i in key %}
+                <a href="/algorithm/{{i.name}}">
+                    <li>{{i.name}}</li>
+                </a>
+                <hr>
+            {% endfor %}
+        </ul>
+    </div>
+
+    <div id="content">
+        <h1>Selection sort</h1>
+        <hr>
+        <h3>What is Selection Sort?</h3>
+        <p>Selection Sort is simple sorting algorithm that works by repeatedly selecting the minimum element from the unsorted portion of the array and placing it at the beginning. 
+            The algorithm divides the array into two parts: the sorted part, which initially is empty, 
+            and the unsorted part, which contains all the elements.</p>
+        <h3>How Selection Sort works?</h3>
+        <ol>
+            <li><b>Initial State:</b></li>
+            <ul>
+                <li>The entire array is considered unsorted.</li>
+                <li>The sorted part is initially empty.</li>
+            </ul>
+            <li><b>Finding the Minimum:</b></li>
+            <ul>
+                <li>Iterate through the unsorted part of the array to find the minimum element.</li>
+                <li>Swap the minimum element with the first element of the unsorted part.</li>
+            </ul>
+            <li><b>Expanding the sorted part:</b></li>
+            <ul>
+                <li>Expand the sorted part by moving its boundary one position to the right.</li>
+                <li>The moved element is now considered part of the sorted portion.</li>
+            </ul>
+            <li><b>Repeat:</b></li>
+            <ul>
+                <li>Repeat steps 2 and 3 until the entire array is sorted.</li>
+            </ul>
+        </ol>
+        <h3>Example:</h3>
+        <p>Consider an unsorted array: [64,25,12,22,11]</p>
+        <ul>
+            <li>Pass 1: [11, 25, 12, 22, 64] (Swapped 11 and 64)</li>
+            <li>Pass 2: [11, 12, 25, 22, 64] (Swapped 12 and 25)</li>
+            <li>Pass 3: [11, 12, 22, 25, 64] (Swapped 22 and 25)</li>
+            <li>Pass 4: [11, 12, 22, 25, 64] (No swaps needed)</li>
+        </ul>
+        <h3>Visualization of Selection Sort</h3>
+        <img src="https://tutorialhorizon.com/static/media/algorithms/2019/01/Selection-Sort-Gif.gif" alt="">
+        <h3>Complexity Analysis:</h3>
+        <h4>Time Complexity:</h4>
+            <ul>
+                <li>O(N<sup>2</sup>) in every case.</li>
+            </ul>
+        <h4>Space Complexity:</h4>
+        <ul>
+            <li>O(N<sup>2</sup>)</li>
+        </ul>
+        <h3>Advantages:</h3>
+        <ul>
+            <li>Simple and easy to understand.</li>
+            <li>Works well with small datasets.</li>
+            <li>In-place sorting(doesn't require additional memory to store temporary data structures)</li>
+        </ul>
+        <h3>Disadvantages:</h3>
+        <ul>
+            <li>Time complexity of O(N<sup>2</sup>) in the worst and average case.</li>
+            <li>Does not work well on large datasets.</li>
+            <li>Does not preserve the relative order of items with equal keys which means it is not stable.</li>
+        </ul>
+    </div>
+
+    <div id="nav-toggle">&#9776;</div>
+</div>
+
+<script>
+    document.getElementById('nav-toggle').addEventListener('click', function () {
+        document.getElementById('sidebar').classList.toggle('active');
+    });
+</script>
+</body>
+</html>

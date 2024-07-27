@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+<style>
+    body{
+        margin: 0;
+    }
+        #container {
+            display: flex;
+        }
+        #sidebar {
+            background-color: #333;
+            color: #fff;
+            width: 300px;
+            padding: 20px;
+            box-sizing: border-box;
+            transition: width 0.3s;
+        }
+
+        #content {
+            flex-grow: 1;
+            padding: 20px;
+            box-sizing: border-box;
+        }
+
+        #nav-toggle {
+            display: none;
+        }
+        ul{
+            list-style: disc;
+        }
+        li{
+            padding-bottom: 10px ;
+        }
+        a{
+            text-decoration: none;
+            color: white;
+        }
+        img{
+            border: solid 1px black;
+            width: 40%;
+        }
+        #sidebar ul li{
+            list-style: none;
+        }
+
+        @media screen and (max-width: 768px) {
+            #sidebar {
+                width: 0;
+                overflow: hidden;
+                background-color: white;
+            }
+            img{
+                width: 90%;
+            }
+            #content {
+                width: 50%;
+            }
+
+            #sidebar.active {
+                width: 400px;
+                border: black solid 1px;
+            }
+
+            #nav-toggle {
+                color: black;
+                display: block;
+                cursor: pointer;
+                position:fixed;
+                top: 20px;
+                left: 20px;
+                z-index: 2;
+                margin-top: 30px;
+            }
+            a{
+                color: black;
+            }
+        }
+</style>
+<body>
+    {% include 'header.html' %}
+<div id="container">
+    <div id="sidebar">
+        <ul>
+            {% for i in key %}
+                <a href="/algorithm/{{i.name}}">
+                    <li>{{i.name}}</li>
+                </a>
+                <hr>
+            {% endfor %}
+        </ul>
+    </div>
+
+    <div id="content">
+        <h1>Binary Search</h1>
+        <hr>
+        <h3>What is Binary Search?</h3>
+        <p>Binary search is a widely used algorithm for finding a specific target value within a sorted array or list. It follows the "divide and conquer" strategy, where the search space is repeatedly divided into smaller parts until the target is found or the search space is empty.</p>
+        <h3>How does Binary Search works?</h3>
+        <ol>
+            <li><b>Precondition:</b></li>
+            <ul>
+                <li>Binary search requires the input array or list to be sorted in ascending or descending order. This is crucial for the algorithm to work correctly.</li>
+            </ul>
+            <li><b>Initialization:</b></li>
+            <ul>
+                <li>Set two pointers, low and high, initially pointing to the first and last elements of the array, respectively.</li>
+                <li>Calculate the middle index as mid = (low + high) / 2.</li>
+            </ul>
+            <li><b>Comparison:</b></li>
+            <ul>
+                <li>Compare the middle element (arr[mid]) with the target value.</li>
+                <li>If the middle element is equal to the target, the search is successful, and the index of the target is found.</li>
+                <li>If the target is less than arr[mid], adjust the high pointer to mid - 1, and repeat the process in the lower half of the array.</li>
+                <li>If the target is greater than arr[mid], adjust the low pointer to mid + 1, and repeat the process in the upper half of the array.</li>
+            </ul>
+            <li><b>Update Midpoint:</b></li>
+            <ul>
+                <li>Recalculate the middle index as mid = (low + high) / 2 after adjusting the pointers.</li>
+            </ul>
+            <li><b>Repeat:</b></li>
+            <ul>
+                <li>Continue the process until the target is found or the low pointer surpasses the high pointer. This means the target is not present in the array.</li>
+            </ul>
+        </ol>
+
+    <h3>Complexity Analysis:</h3>
+    <h4>Time Complexity:</h4>
+    <ul>
+        <li><b>Best Case:</b> O(1)</li>
+        <li><b>Average Case:</b> O(log N)</li>
+        <li><b>Worst Case:</b>O(log N)</li>
+    </ul>
+    <h4>Space Complexity:</h4>
+    <ul>
+        <li>O(1), If the recursive call stack is considered then the auxiliary space will be O(logN).</li>
+    </ul>
+    <h3>Advantages:</h3>
+    <ul>
+        <li>Binary search is faster than linear search, especially for large arrays.</li>
+        <li>More efficient than other searching algorithms with a similar time complexity, such as interpolation search or exponential search.</li>
+        <li>well-suited for searching large datasets that are stored in external memory, such as on a hard drive or in the cloud.</li>
+    </ul>
+    <h3>Disadvantages:</h3>
+    <ul>
+        <li>The array should be sorted.</li>
+        <li>equires that the data structure being searched be stored in contiguous memory locations. </li>
+    </ul>
+    </div>
+
+
+    <div id="nav-toggle">&#9776;</div>
+</div>
+
+<script>
+    document.getElementById('nav-toggle').addEventListener('click', function () {
+        document.getElementById('sidebar').classList.toggle('active');
+    });
+</script>
+</body>
+</html>

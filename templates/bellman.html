@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+<style>
+    body{
+        margin: 0;
+    }
+        #container {
+            display: flex;
+        }
+        #sidebar {
+            background-color: #333;
+            color: #fff;
+            width: 300px;
+            padding: 20px;
+            box-sizing: border-box;
+            transition: width 0.3s;
+        }
+
+        #content {
+            flex-grow: 1;
+            padding: 20px;
+            box-sizing: border-box;
+        }
+
+        #nav-toggle {
+            display: none;
+        }
+        ul{
+            list-style: disc;
+        }
+        li{
+            padding-bottom: 10px ;
+        }
+        a{
+            text-decoration: none;
+            color: white;
+        }
+        img{
+            border: solid 1px black;
+            width: 40%;
+        }
+        #sidebar ul li{
+            list-style: none;
+        }
+
+        @media screen and (max-width: 768px) {
+            #sidebar {
+                width: 0;
+                overflow: hidden;
+                background-color: white;
+            }
+
+            #content {
+                width: 50%;
+            }
+
+            #sidebar.active {
+                width: 400px;
+                border: black solid 1px;
+            }
+
+            #nav-toggle {
+                color: black;
+                display: block;
+                cursor: pointer;
+                position:fixed;
+                top: 20px;
+                left: 20px;
+                z-index: 2;
+                margin-top: 30px;
+            }
+            a{
+                color: black;
+            }
+            img{
+                width: 90%;
+            }
+        }
+</style>
+<body>
+    {% include 'header.html' %}
+<div id="container">
+    <div id="sidebar">
+        <ul>
+            {% for i in key %}
+                <a href="/algorithm/{{i.name}}">
+                    <li>{{i.name}}</li>
+                </a>
+                <hr>
+            {% endfor %}
+        </ul>
+    </div>
+
+    <div id="content">
+        <h1>Bellman-Ford Algorithm</h1>
+        <hr>
+        <h3>What is Bellman-Ford Algorithm?</h3>
+        <p>
+            Bellman-Ford algorithm is used to find the shortest paths from a single source vertex to all other vertices in a weighted graph, even when the graph contains negative-weight edges. It can also detect negative cycles in the graph. </p>
+        <h3>How does Bellman-Ford algorithm works?</h3>
+        <ol>
+            <li><b>Initialization:</b></li>
+            <ul>
+                <li>Set the distance of the source vertex to 0, and the distance of all other vertices to infinity.</li>
+                <li>Mark all vertices as unvisited.</li>
+            </ul>
+            <li><b>Relax edges:</b></li>
+            <ul>
+                <li>Repeat the following process for the number of vertices minus one times (V-1 iterations), where V is the number of vertices.</li>
+                <li>For each edge (u, v) in the graph, relax the edge:</li>
+                <ul>
+                    <li>If distance[u] + weight(u, v) < distance[v], update distance[v] to distance[u] + weight(u, v).</li>
+                </ul>
+            </ul>
+            <li><b>Check for negative cycles:</b></li>
+            <ul>
+                <li>After V-1 iterations, check for negative cycles by performing one more iteration.</li>
+                <li>If any distance can be further reduced, then there is a negative cycle in the graph.</li>
+            </ul>
+        </ol>
+    <h3>Example:</h3>
+    <img src="https://slideplayer.com/slide/10658514/36/images/54/Bellman-Ford+Example+A+B+C+D+E+A+B+C+D+E+%E2%88%9E.jpg" alt="">
+    <h3>Complexity Analysis:</h3>
+    <h4>Time Complexity:</h4>
+    <ul>
+        <li>O(|V| * |E|), where |E| is the number of edges in the graph.</li>
+    </ul>
+    <h4>Space Complexity:</h4>
+    <ul>
+        <li>O(|V| + |E|)</li>
+    </ul>
+    <h3>Advantages:</h3>
+    <ul>
+        <li>Bellman-Ford can handle graphs with negative weight edges, unlike Dijkstra's algorithm. This makes it suitable for scenarios where negative weights are present.</li>
+        <li>The algorithm can be extended to detect the presence of negative cycles in the graph, which can be valuable information in certain applications.</li>
+        <li>Unlike Dijkstra's algorithm, Bellman-Ford doesn't require a priority queue. This makes it simpler to implement and is advantageous in scenarios where implementing a priority queue is expensive or challenging.</li>
+    </ul>
+    <h3>Disadvantages:</h3>
+    <ul>
+        <li>The primary disadvantage of Bellman-Ford is its time complexity. The worst-case time complexity is O(VE), which makes it less efficient compared to Dijkstra's algorithm, especially for dense graphs.</li>
+        <li>In certain cases, Bellman-Ford may continue to iterate through all the edges even if the shortest paths have already been found. </li>
+        <li>When all edge weights are non-negative, Dijkstra's algorithm is generally faster than Bellman-Ford. The extra capability of handling negative weights comes at the cost of increased time complexity.</li>
+    </ul>
+    </div>
+    <div id="nav-toggle">&#9776;</div>
+</div>
+<script>
+    document.getElementById('nav-toggle').addEventListener('click', function () {
+        document.getElementById('sidebar').classList.toggle('active');
+    });
+</script>
+</body>
+</html>

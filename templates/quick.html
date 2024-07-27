@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+<style>
+    body{
+        margin: 0;
+    }
+        #container {
+            display: flex;
+        }
+        #sidebar {
+            background-color: #333;
+            color: #fff;
+            width: 300px;
+            padding: 20px;
+            box-sizing: border-box;
+            transition: width 0.3s;
+        }
+        #content {
+            flex-grow: 1;
+            padding: 20px;
+            box-sizing: border-box;
+        }
+        #nav-toggle {
+            display: none;
+        }
+        ul{
+            list-style: disc;
+        }
+        li{
+            padding-bottom: 10px ;
+        }
+        a{
+            text-decoration: none;
+            color: white;
+        }
+        img{
+            width: 90%;
+            border: 1px solid black;
+        }
+        #sidebar ul li{
+            list-style: none;
+        }
+        @media screen and (max-width: 768px) {
+            #sidebar {
+                width: 0;
+                overflow: hidden;
+                background-color: white;
+            }
+            #content {
+                width: 50%;
+            }
+            #sidebar.active {
+                width: 400px;
+                border: black solid 1px;
+            }
+            #nav-toggle {
+                color: black;
+                display: block;
+                cursor: pointer;
+                position:fixed;
+                top: 20px;
+                left: 20px;
+                z-index: 2;
+                margin-top: 30px;
+            }
+            a{
+                color: black;
+            }
+        }
+</style>
+<body>
+    {% include 'header.html' %}
+<div id="container">
+    <div id="sidebar">
+        <ul>
+            {% for i in key %}
+                <a href="/algorithm/{{i.name}}">
+                    <li>{{i.name}}</li>
+                </a>
+                <hr>
+            {% endfor %}
+        </ul>
+    </div>
+
+    <div id="content">
+        <h1>Quick Sort</h1>
+        <hr>
+        <h3>What is Quick Sort?</h3>
+        <p>QuickSort is a widely used sorting algorithm that follows the divide-and-conquer paradigm. 
+            It was developed by Tony Hoare in 1960. The basic idea behind QuickSort is to select a "pivot" element from the array and partition the other elements into two sub-arrays according to whether they are less than or greater than the pivot. 
+            The sub-arrays are then recursively sorted.</p>
+        <h3>How Quick Sort works?</h3>
+        <ol>
+            <li><b>Choose a Pivot:</b></li>
+            <ul>
+                <li>Select a pivot element from the array. The pivot can be chosen in various ways, such as selecting the first element, the last element, the middle element, or even a random element.</li>
+            </ul>
+            <li><b>Partitioning:</b></li>
+            <ul>
+                <li>Rearrange the array such that all elements less than the pivot are on its left, and all elements greater than the pivot are on its right. The pivot itself is in its final sorted position.</li>
+            </ul>
+            <li><b>Recursion:</b></li>
+            <ul>
+                <li>Recursively apply the above steps to the sub-arrays formed by the partitioning process.</li>
+            </ul>
+        </ol>
+        <h3>Example:</h3>
+        <ul>
+            <li>Select a pivot element. For this example, we'll choose the last element, which is 4.</li>Array: [5, 3, 7, 1, 8, 2, 6, 4] (Pivot: 4)
+            <li>Rearrange the array so that elements less than the pivot are on the left, and elements greater than the pivot are on the right.</li>Array after partitioning: [3, 1, 2, 4, 8, 7, 6, 5]
+
+            The pivot (4) is now in its sorted position.
+            <li>Now, apply the QuickSort algorithm recursively on the left and right sub-arrays.</li>
+            <li>The sorted left sub-array, the pivot, and the sorted right sub-array combine to form the final sorted array.</li>Final sorted array: [1, 2, 3, 4, 5, 6, 7, 8]
+        </ul>
+        <h3>Visualization of Quick Sort:</h3>
+        <img src="https://upload.wikimedia.org/wikipedia/commons/9/9c/Quicksort-example.gif" alt="">
+        <h3>Complexity Analysis:</h3>
+        <h4>Time Complexity:</h4>
+        <ul>
+            <li><b>Best Case: </b>O(NlogN), when the pivot chosen at the each step divides the array into roughly equal halves.</li>
+            <li><b>Average Case: </b>O(NlogN)</li>
+            <li><b>Worst Case: </b>O(N<sup>2</sup>),  When the array is already sorted and the pivot is always chosen as the smallest or largest element.</li>
+        </ul>
+        <h4>Space Complexity:</h4>
+        <ul>
+            <li>O(1), if we don't consider the recursive stack space. If we consider the recursive stack space then, in the worst case quicksort could make O(N).</li>
+        </ul>
+        <h3>Advantages:</h3>
+        <ul>
+            <li>In-place sorting.</li>
+            <li>It is a divide-and-conquer algorithm that makes it easier to solve problems.</li>
+            <li>It is efficient on large data sets.</li>
+        </ul>
+        <h3>Disadvantages:</h3>
+        <ul>
+            <li>It has a worst-case time complexity of O(N2), which occurs when the pivot is chosen poorly.</li>
+            <li>It is not a good choice for small data sets.</li>
+            <li>It is not a stable sort, meaning that if two elements have the same key, their relative order will not be preserved in the sorted output in case of quick sort, because here we are swapping elements according to the pivot’s position (without considering their original positions).</li>
+        </ul>
+
+
+
+    </div>
+
+    <div id="nav-toggle">&#9776;</div>
+</div>
+
+<script>
+    document.getElementById('nav-toggle').addEventListener('click', function () {
+        document.getElementById('sidebar').classList.toggle('active');
+    });
+</script>
+</body>
+</html>

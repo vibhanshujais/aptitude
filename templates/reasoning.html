@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        *{
+            box-sizing: border-box;
+        }
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background-color: white;
+        }
+        .section {
+            padding-left: 10px;
+            text-align: left;
+            background-color: white;
+            width: 90%;
+            float: left;
+            margin: 2% 5% 1% 5% ;
+            border-radius: 10px;
+            box-shadow: 0px 0px 3px 3px rgb(232, 212, 212);
+        }
+        .section:hover{
+            translate: -5px -5px;
+            box-shadow: 0px 0px 50px 15px rgb(161, 223, 252);
+            text-align: center;
+        }
+        a{
+            text-decoration: none;
+            color: black;
+        }
+    </style>
+</head>
+<body>
+    {% include 'header.html' %}
+    <center><h1>REASONING</h1></center>
+    {% for i in key %}
+    <a href="{% url 'reasoning_questions' topic_name=i %}">
+        <section class="section">
+            <h2>{{i}}</h2>
+        </section>
+    </a>
+    {% endfor %}
+</body>
+</html>

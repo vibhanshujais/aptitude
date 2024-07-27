@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vibhanshu Jaiswal</title>
+    <meta name="keywords" content="kruksal, algo, algorithms, dsa algorihtm,  kruksal algorithm, mst, minimum spanning tree ">
+    <style>
+        body{
+            margin: 0;
+        }
+            #container {
+                display: flex;
+            }
+            #sidebar {
+                background-color: #333;
+                color: #fff;
+                width: 300px;
+                padding: 20px;
+                box-sizing: border-box;
+                transition: width 0.3s;
+            }
+    
+            #content {
+                flex-grow: 1;
+                padding: 20px;
+                box-sizing: border-box;
+            }
+    
+            #nav-toggle {
+                display: none;
+            }
+            ul{
+                list-style: disc;
+            }
+            li{
+                padding-bottom: 10px ;
+            }
+            a{
+                text-decoration: none;
+                color: white;
+            }
+            img{
+                border: solid 1px black;
+                width: 40%;
+                height: 15%;
+            }
+            #sidebar ul li{
+                list-style: none;
+            }
+    
+            @media screen and (max-width: 768px) {
+                #sidebar {
+                    width: 0;
+                    overflow: hidden;
+                    background-color: white;
+                }
+    
+                #content {
+                    width: 50%;
+                }
+    
+                #sidebar.active {
+                    width: 400px;
+                    border: black solid 1px;
+                    position: fixed;
+                }
+    
+                #nav-toggle {
+                    color: black;
+                    display: block;
+                    cursor: pointer;
+                    position:fixed;
+                    top: 20px;
+                    left: 20px;
+                    z-index: 2;
+                    margin-top: 30px;
+                }
+                a{
+                    color: black;
+                }
+                img{
+                    width: 90%;
+                }
+            }
+    </style>
+</head>
+<body>
+    {% include 'header.html' %}
+    <div id="container">
+        <div id="sidebar">
+            <ul>
+                {% for i in key %}
+                    <a href="/algorithm/{{i.name}}">
+                        <li>{{i.name}}</li>
+                    </a>
+                    <hr>
+                {% endfor %}
+            </ul>
+        </div>
+    
+        <div id="content">
+            <h1>Heap Sort</h1>
+            <hr>
+            <h3>What is Heap Sort?</h3>
+            <p>            Heap Sort is a comparison-based sorting algorithm that uses a binary heap data structure to organize elements for efficient sorting. It was first proposed by J.W.J. Williams in 1964. The algorithm has a time complexity of O(n log n) for the worst, average, and best cases, making it relatively efficient.
+            </p>
+            <h3>How Heap sort  works?</h3>
+            <ol>
+                <li><b>Heapify the array:</b></li>
+<ul>
+    <li>                The first step is to build a max-heap from the given array. A max-heap is a binary tree where the value of each node is greater than or equal to the values of its children. The idea is to start from the last non-leaf node and move upwards to the root, ensuring that the heap property is maintained at each step.
+    </li>
+</ul>                <li><b>Build Max-Heap:</b></li>
+<ul>
+    <li>                Starting from the last non-leaf node (which is at index (n/2 - 1) in a zero-based index system, where n is the number of elements in the array), perform a heapify operation to maintain the max-heap property. Continue this process until you reach the root.
+    </li>
+</ul>                <li><b>Extraxt Max and Heapify:</b></li>
+<ul>
+    <li>                Now, the max-heap is built, and the largest element (at the root) can be extracted. Swap this element with the last element in the array and reduce the heap size by one. After the swap, heapify the root to maintain the max-heap property.
+    </li>
+</ul>                <li><b>Repeat:</b></li>
+<ul>
+    <li>                Repeat the extraction and heapify steps until the heap size becomes 1. After each extraction, the largest remaining element is placed at the end of the array.
+    </li>
+</ul>                <li><b>Sorted array:</b></li>
+<ul>
+    <li>                Once all elements are extracted, the array is sorted in ascending order.
+    </li>
+</ul>            </ol>
+
+        <h3>Visualization of Heap Sort:</h3>
+        <img src="https://upload.wikimedia.org/wikipedia/commons/f/fe/Heap_sort_example.gif" alt="">
+        <h3>Complexity Analysis:</h3>
+        <h4>Time Complexity: </h4>
+            <ul>
+                <li>O(nlogn) in every case.</li>
+            </ul>
+        <h4>Space Complexity: </h4><ul>
+            <li>O(1)</li>
+        </ul>
+           
+        <h3>Advantages:</h3>
+         <ul>
+            <li>Heap Sort is an in-place sorting algorithm, which means it uses only a constant amount of extra memory for swapping elements during the sorting process. </li>
+            <li>Heap Sort is a stable sorting algorithm. </li>
+            <li> Heap Sort has good cache performance, making it suitable for external sorting scenarios where data is too large to fit into the computer's main memory.</li>
+         </ul>
+        <h3>Disadvantages:</h3>
+        <ul>
+            <li>Heap Sort does not adapt to the existing order of elements in the input array.</li>
+            <li>Slower on Small Datasets.</li>
+        </ul>
+            <div id="nav-toggle">&#9776;</div>
+        </div>
+    </div>
+    <script>
+        document.getElementById('nav-toggle').addEventListener('click', function () {
+            document.getElementById('sidebar').classList.toggle('active');
+        });
+    </script>
+</body>
+</html>

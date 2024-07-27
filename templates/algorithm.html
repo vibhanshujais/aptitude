@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        *{
+            box-sizing: border-box;
+        }
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            color: black;
+        }
+        .section {
+            text-align: left;
+            padding: 10px;
+            background-color: #ffffff;
+            color: black;
+            width: 90%;
+            margin: 0% 5% 1% 5% ;
+            border-radius: 2px;
+            box-shadow: 0px 0px 5px 1px rgb(232, 212, 212);
+        }
+        .section:hover{
+            translate: 0px -5px; 
+            box-shadow: 0px 0px 5px 1px rgb(161, 223, 252);
+            text-align: center;
+            cursor: pointer;
+        }
+        a{
+            text-decoration: none;
+            color: black;
+        }
+    </style>
+</head>
+<body>
+    {% include 'header.html' %}
+    <center>
+        <h1>Algorithms</h1>
+    </center>
+    {% for i in key %}
+            <a href="{% url 'algorithm' algo_name=i %}">
+                <section class="section">
+                    {{i}}
+                </section>
+            </a>
+    {% endfor %}
+</body>
+</html>

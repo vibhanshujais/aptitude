@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+<style>
+    body{
+        margin: 0;
+    }
+        #container {
+            display: flex;
+        }
+        #sidebar {
+            background-color: #333;
+            color: #fff;
+            width: 300px;
+            padding: 20px;
+            box-sizing: border-box;
+            transition: width 0.3s;
+        }
+
+        #content {
+            flex-grow: 1;
+            padding: 20px;
+            box-sizing: border-box;
+        }
+
+        #nav-toggle {
+            display: none;
+        }
+        ul{
+            list-style: disc;
+        }
+        li{
+            padding-bottom: 10px ;
+        }
+        a{
+            text-decoration: none;
+            color: white;
+        }
+        img{
+            border: solid 1px black;
+            width: 90%;
+        }
+        #sidebar ul li{
+            list-style: none;
+        }
+
+        @media screen and (max-width: 768px) {
+            #sidebar {
+                width: 0;
+                overflow: hidden;
+                background-color: white;
+            }
+
+            #content {
+                width: 50%;
+            }
+
+            #sidebar.active {
+                width: 400px;
+                border: black solid 1px;
+            }
+
+            #nav-toggle {
+                color: black;
+                display: block;
+                cursor: pointer;
+                position:fixed;
+                top: 20px;
+                left: 20px;
+                z-index: 2;
+                margin-top: 30px;
+            }
+            a{
+                color: black;
+            }
+        }
+</style>
+<body>
+    {% include 'header.html' %}
+<div id="container">
+    <div id="sidebar">
+        <ul>
+            {% for i in key %}
+                <a href="/algorithm/{{i.name}}">
+                    <li>{{i.name}}</li>
+                </a>
+                <hr>
+            {% endfor %}
+        </ul>
+    </div>
+
+    <div id="content">
+        <h1>Djikstra's Algorithm</h1>
+        <hr>
+        <h3>What is Djikstra's ALgorithm?</h3>
+        <p>Dijkstra's algorithm is a widely used algorithm for finding the shortest path between nodes in a graph. It works for graphs with non-negative weights on the edges and is often used in routing and network design. It uses Breadth-first technique to find the shortest path.</p>
+        <h3>How does Djikstra's Algorithm works?</h3>
+        <ol>
+            <li><b>Initialization: </b></li>
+            <ul>
+                <li>Set the distance of the source node to 0, and the distance of all other nodes to infinity.</li>
+                <li>Mark all nodes as unvisited.</li>
+            </ul>
+            <li><b>Select the node with the smallest distance:</b></li>
+            <ul>
+                <li>Choose the unvisited node with the smallest known distance as the current node.</li>
+            </ul>
+            <li><b>Update neighbours:</b></li>
+            <ul>
+                <li>For each neighboring node of the current node:</li>
+                <ul>
+                    <li>Calculate the tentative distance from the source to that neighbor through the current node.</li>
+                    <li>If the calculated distance is smaller than the previously known distance, update the distance.</li>
+                </ul>
+            </ul>
+            <li><b>Mark current node as visited:</b></li>
+            <ul>
+                <li>Mark the current node as visited to avoid revisiting it.</li>
+            </ul>
+            <li><b>Repeat steps 2-4:</b></li>
+            <ul>
+                <li>Repeat steps 2-4 until all nodes are visited.</li>
+            </ul>
+        </ol>
+
+    <h3>Example:</h3>
+    <p>Consider the graph:</p>
+     <pre>
+        A - (2) - B
+        |         |
+       (3)       (1)
+        |         |
+        C - (4) - D
+    </pre>
+    <p>Let's find the shortest paths from node A to all other nodes using Dijkstra's algorithm:</p>
+    <ol>
+        <li><b>Initialization:</b></li>
+        <ul>
+            <li>Distance: A (0), B (∞), C (∞), D (∞)</li>
+            <li>Visited: None</li>
+        </ul>
+        <li><b>Select the node with smallest distance:</b></li>
+        <ul>
+            <li>Start with node A (distance 0).</li>
+        </ul>
+        <li><b>Update neighbors:</b></li>
+        <ul>
+            <li>Update distances for B (2) and C (3).</li>
+        </ul>
+        <li><b>Mark current node as visited:</b></li>
+        <ul>
+            <li>Mark A as visited.</li>
+        </ul>
+        <li><b>Repeat:</b></li>
+        <ul>
+            <li>Choose the unvisited node with the smallest distance (B).</li>
+            <li>Update distances for D (3) through B.</li>
+            <li>Mark B as visited.</li>
+            <li>Choose the unvisited node with the smallest distance (C).</li>
+            <li>Distance for D through B (3) is less than distance through C (7), so it will not be updated.</li>
+            <li>Mark C as visited.</li>
+            <li>Choose the unvisited node with the smallest distance (D).</li>
+            <li>Mark D as visited.</li>
+        </ul>
+        <li><b>Final result:</b></li>
+        <ul>
+            <li>Shortest distances: A (0), B (2), C (3), D (3)</li>
+        </ul>
+    </ol>
+    <h3>Visualization of Djikstra's Algorithm:</h3>
+    <img src="https://upload.wikimedia.org/wikipedia/commons/5/57/Dijkstra_Animation.gif" alt="">
+
+    <h3>Complexity Analysis:</h3>
+    <h4>Time Complexity:</h4>
+    <ul>
+        <li><b>Best Case:</b> O((V+E)logV)</li>
+        <li><b>Average Case:</b> O((V+E)logV)</li>
+        <li><b>Worst Case:</b>O(V<sup>2</sup> )</li>
+    </ul>
+    <h4>Space Complexity:</h4>
+    <ul>
+        <li>O(V)</li>
+    </ul>
+    <h3>Advantages:</h3>
+    <ul>
+        <li>If all edge weights are non-negative, Dijkstra's algorithm ensures that the first time a node is visited, its distance is the shortest distance from the source.</li>
+        <li>Well-suited for scenarios where the problem can be modeled as a graph and the goal is to find the most efficient path, such as in network routing.</li>
+    </ul>
+    <h3>Disadvantages:</h3>
+    <ul>
+        <li>Dijkstra's algorithm doesn't work correctly with graphs containing negative-weight edges.</li>
+        <li>The space complexity can be a concern for large graphs, especially when using a priority queue or min-heap.</li>
+    </ul>
+    </div>
+
+
+    <div id="nav-toggle">&#9776;</div>
+</div>
+
+<script>
+    document.getElementById('nav-toggle').addEventListener('click', function () {
+        document.getElementById('sidebar').classList.toggle('active');
+    });
+</script>
+</body>
+</html>

@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vibhanshu Jaiswal</title>
+    <meta name="keywords" content=", algo, algorithms, dsa algorihtm,   ">
+    <style>
+        body{
+            margin: 0;
+        }
+            #container {
+                display: flex;
+            }
+            #sidebar {
+                background-color: #333;
+                color: #fff;
+                width: 300px;
+                padding: 20px;
+                box-sizing: border-box;
+                transition: width 0.3s;
+            }
+    
+            #content {
+                flex-grow: 1;
+                padding: 20px;
+                box-sizing: border-box;
+            }
+    
+            #nav-toggle {
+                display: none;
+            }
+            ul{
+                list-style: disc;
+            }
+            li{
+                padding-bottom: 10px ;
+            }
+            a{
+                text-decoration: none;
+                color: white;
+            }
+            img{
+                border: solid 1px black;
+                width: 40%;
+                height: 10%;
+            }
+            #sidebar ul li{
+                list-style: none;
+            }
+    
+            @media screen and (max-width: 768px) {
+                #sidebar {
+                    width: 0;
+                    overflow: hidden;
+                    background-color: white;
+                }
+    
+                #content {
+                    width: 50%;
+                }
+    
+                #sidebar.active {
+                    width: 400px;
+                    border: black solid 1px;
+                }
+    
+                #nav-toggle {
+                    color: black;
+                    display: block;
+                    cursor: pointer;
+                    position:fixed;
+                    top: 20px;
+                    left: 20px;
+                    z-index: 2;
+                    margin-top: 30px;
+                }
+                a{
+                    color: black;
+                }
+                img{
+                    width: 90%;
+                }
+            }
+    </style>
+</head>
+<body>
+    {% include 'header.html' %}
+    <div id="container">
+        <div id="sidebar">
+            <ul>
+                {% for i in key %}
+                    <a href="/algorithm/{{i.name}}">
+                        <li>{{i.name}}</li>
+                    </a>
+                    <hr>
+                {% endfor %}
+            </ul>
+        </div>
+    
+        <div id="content">
+            <h1></h1>
+            <hr>
+            <h3>What is Prim's Algorithm?</h3>
+            <p>Prim's algorithm is a greedy algorithm used for finding the minimum spanning tree (MST) of a connected, undirected graph.
+                 The minimum spanning tree is a subgraph that includes all the vertices of the original graph and forms a tree with the minimum possible total edge weight.
+                 The key idea behind Prim's algorithm is to always choose the edge with the minimum weight that connects a vertex in the MST to a vertex outside the MST.
+                 This ensures that the growing tree remains connected and has the minimum possible total weight.</p>
+            <h3>How Prim's Algorithm works?</h3>
+            <ol>
+                <li><b>Initialization:</b></li>
+                <ul>
+                    <li>Choose a starting vertex. This can be arbitrary, as the algorithm will produce the same result regardless of the starting point.</li>
+                    <li>Create an empty set to store the vertices that are part of the minimum spanning tree (MST).</li>
+                    <li>Create a priority queue (or a min-heap) to store the edges with their weights.</li>
+                </ul>
+                <li><b>Selecting Edges:</b></li>
+                <ul>
+                    <li>Add the chosen starting vertex to the set of MST vertices.</li>
+                    <li>Add all edges connected to the chosen vertex to the priority queue, with their weights as the key.</li>
+                </ul>
+                <li><b>Growing the MST:</b></li>
+                <ul>
+                    <li>While the priority queue is not empty:</li>
+                    <ul>
+                        <li>Extract the edge with the minimum weight from the priority queue.</li>
+                        <li>If adding the edge to the MST does not create a cycle (i.e., the other vertex of the edge is not already in the MST set), add the edge to the MST set.</li>
+                        <li>Add the new vertex to the MST set.</li>
+                        <li>Add all edges connected to the new vertex that haven't been added to the priority queue.</li>
+                    </ul>
+                </ul>
+                <li><b>Termination:</b></li>
+                <ul>
+                    <li>Continue this process until all vertices are included in the MST.</li>
+                </ul>
+            </ol>
+            <h3>Visualization of Prim's Algorithm:</h3>
+            <img src="https://upload.wikimedia.org/wikipedia/en/9/96/Prim-animation.gif" alt="">
+        <h3>Complexity Analysis:</h3>
+        <h4>Time Complexity: </h4>
+            <ul>
+                <li>The time complexity of Prim's algorithm is dominated by the priority queue operations, 
+                    resulting in O(ElogE) time complexity.</li>
+            </ul>
+        <h4>Space Complexity:</h4>
+            <ul>
+                <li>The space complexity is O(V+E) due to the need to store the MST vertices and the priority queue.</li>
+            </ul>
+        <h3>Advantages:</h3>
+            <ul>
+                <li> Prim's algorithm guarantees the optimality of the resulting minimum spanning tree, as it consistently selects the minimum-weight edge at each step.</li>
+                <li>Prim's algorithm tends to perform well on sparse graphs (graphs with fewer edges), as the priority queue operations are primarily determined by the number of edges.</li>
+                <li>The algorithm is relatively straightforward to implement and understand, making it a good choice for educational purposes or situations where simplicity is important.</li>
+            </ul>
+        <h3>Disadvantages:</h3>
+            <ul>
+                <li>The performance of Prim's algorithm can degrade on dense graphs (graphs with many edges), as the number of edges becomes a significant factor in the time complexity.</li>
+                <li>If the graph changes frequently,
+                     and the minimum spanning tree needs to be updated, 
+                     other algorithms like Kruskal's may be more suitable. 
+                     Prim's algorithm typically requires a complete recomputation of the MST.</li>
+            </ul>
+
+            <div id="nav-toggle">&#9776;</div>
+        </div>
+    </div>
+    <script>
+        document.getElementById('nav-toggle').addEventListener('click', function () {
+            document.getElementById('sidebar').classList.toggle('active');
+        });
+    </script>
+</body>
+</html>

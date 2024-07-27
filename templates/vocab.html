@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        *{
+            box-sizing: border-box;
+        }
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background-color: white;
+        }
+        table{
+            width: 100%;
+            padding: 2%;
+            border: 1px black;
+        }
+        td{
+            padding: 7px;
+            font-size: large;
+            border: 1px solid black;
+        }
+    </style>
+</head>
+<body>
+    {% include 'header.html' %}
+    <center class="center">
+        {% for i in data %}
+            <h1>{{i}}</h1>
+        {% endfor %}
+    </center>
+    <table border="1" cellspacing="0">
+        {% for i in key %}
+            <tr>
+                <td>{{i.question}}</td>
+                <td>{{i.answer}}</td>
+            </tr>
+        {% endfor %}
+    </table>
+</body>
+</html>

@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+<style>
+    body{
+        margin:0;
+    }
+        #container {
+            display: flex;
+        }
+        #sidebar {
+            background-color: #333;
+            color: #fff;
+            width: 300px;
+            padding: 20px;
+            box-sizing: border-box;
+            transition: width 0.3s;
+        }
+        #content {
+            flex-grow: 1;
+            padding: 20px;
+            box-sizing: border-box;
+        }
+        #nav-toggle {
+            display: none;
+        }
+        ul{
+            list-style: none;
+        }
+        li{
+            padding-bottom: 10px ;
+        }
+        a{
+            text-decoration: none;
+            color: white;
+        }
+        @media screen and (max-width: 768px) {
+            #sidebar {
+                width: 0;
+                overflow: hidden;
+                background-color: white;
+
+            }
+
+            #content {
+                width: 50%;
+            }
+
+            #sidebar.active {
+                width: 400px;
+                border: black solid 1px;
+            }
+
+            #nav-toggle {
+                color: black;
+                display: block;
+                cursor: pointer;
+                position:fixed;
+                top: 20px;
+                left: 20px;
+                z-index: 2;
+                margin-top: 30px;
+            }
+            a{
+                color: black;
+            }
+        }
+</style>
+<body>
+    {% include 'header.html' %}
+<div id="container">
+    <div id="sidebar">
+        <ul>
+            {% for i in key %}
+                <a href="/algorithm/{{i.name}}">
+                    <li>{{i.name}}</li>
+                </a>
+                <hr>
+            {% endfor %}
+        </ul>
+    </div>
+
+    <div id="content">
+        <h1>Radix sort</h1>
+        <hr>
+        <h3>What is Radix Sort:</h3>
+        <p>Radix Sort is a non-comparative sorting algorithm that sort numbers by processing individual digits. 
+            It sort data with integer keys by grouping the keys by individual digits starting from the least significant digits and moving towards the most significant digits.
+             The basic idea is to sort the elements based on each digit from the rightmost to the leftmost considering their positional values.</p>
+        <h3>How Radix Sort works:</h3>
+        <ol>
+            <li><b>Initialization:</b>Determine the maximum number of digits in the input numbers this is crucial for setting the number of passes needed during the sorting process.</li>
+            <li><b>Updating by digits:</b>Starting from the least significant digits distribute the numbers into buckets based on the value of current digit. Bucket represent a range of values.
+            </li>
+            <li><b>Collecting buckets:</b>Gather the numbers from bucket in the order they were placed fully stop this step preserve the relative order of numbers with the same digit in the current position.</li>
+            <li><b>Repeat:</b>Repeat the process for each subsequent digit moving towards the most significant digit fully stop this ensures that the number of shortage at ease digit level resulting in the overall sorted order.</li>
+        </ol>
+        <h3>Advantages:</h3>
+        <ul>
+            <li>Linear time complexity.</li>
+            <li>Stable sorting.</li>
+        </ul>
+        <h3>Disadvantage is:</h3>
+        <ol>
+            <li>Radix sort is most effective for sorting integers of fixed size string.</li>
+            <li>Space complexity can be concern, especially when dealing with large number of datasets.</li>
+        </ol>
+    </div>
+    <div id="nav-toggle">&#9776;</div>
+</div>
+<script>
+    document.getElementById('nav-toggle').addEventListener('click', function () {
+        document.getElementById('sidebar').classList.toggle('active');
+    });
+</script>
+</body>
+</html>

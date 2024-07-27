@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vibhanshu Jaiswal</title>
+    <meta name="keywords" content="kruksal, algo, algorithms, dsa algorihtm,  kruksal algorithm, mst, minimum spanning tree ">
+    <style>
+        body{
+            margin: 0;
+        }
+            #container {
+                display: flex;
+            }
+            #sidebar {
+                background-color: #333;
+                color: #fff;
+                width: 300px;
+                padding: 20px;
+                box-sizing: border-box;
+                transition: width 0.3s;
+            }
+    
+            #content {
+                flex-grow: 1;
+                padding: 20px;
+                box-sizing: border-box;
+            }
+    
+            #nav-toggle {
+                display: none;
+            }
+            ul{
+                list-style: disc;
+            }
+            li{
+                padding-bottom: 10px ;
+            }
+            a{
+                text-decoration: none;
+                color: white;
+            }
+            img{
+                border: solid 1px black;
+                width: 40%;
+                height: 10%;
+            }
+            #sidebar ul li{
+                list-style: none;
+            }
+    
+            @media screen and (max-width: 768px) {
+                #sidebar {
+                    width: 0;
+                    overflow: hidden;
+                    background-color: white;
+                }
+    
+                #content {
+                    width: 50%;
+                }
+    
+                #sidebar.active {
+                    width: 400px;
+                    border: black solid 1px;
+                }
+    
+                #nav-toggle {
+                    color: black;
+                    display: block;
+                    cursor: pointer;
+                    position:fixed;
+                    top: 20px;
+                    left: 20px;
+                    z-index: 2;
+                    margin-top: 30px;
+                }
+                a{
+                    color: black;
+                }
+                img{
+                    width: 90%;
+                }
+            }
+    </style>
+</head>
+<body>
+    {% include 'header.html' %}
+    <div id="container">
+        <div id="sidebar">
+            <ul>
+                {% for i in key %}
+                    <a href="/algorithm/{{i.name}}">
+                        <li>{{i.name}}</li>
+                    </a>
+                    <hr>
+                {% endfor %}
+            </ul>
+        </div>
+    
+        <div id="content">
+            <h1>Kruksal's Algorithm</h1>
+            <hr>
+            <h3>What is Kruksal's Algorithm?</h3>
+            <p>Kruskal's algorithm is another greedy algorithm used for finding the minimum spanning tree (MST) of a connected, undirected graph. The key idea is to sort the edges in ascending order of their weights and then add edges to the MST one by one, ensuring that adding an edge does not create a cycle. This algorithm uses a disjoint-set data structure to keep track of the connected components of the graph.</p>
+            <h3>How Kruksal's Algorithm works?</h3>
+            <ol>
+                <li><b>Sort edges:</b></li>
+                <ul>
+                    <li>Sort all the edges of the graph in non-decreasing order of their weights.</li>
+                </ul>
+                <li><b>Initialize Disjoint sets:</b></li>
+                <ul>
+                    <li>Create a disjoint-set data structure to keep track of connected components.</li>
+                </ul>
+                <li><b>Iterate over edges:</b></li>
+                <ul>
+                    <li>Iterate through the sorted edges and add each edge to the MST if it does not create a cycle.</li>
+                    <li>The disjoint-set data structure helps in checking whether adding an edge creates a cycle.</li>
+                </ul>
+                <li><b>Termination:</b></li>
+                <ul>
+                    <li>Continue this process until the MST has n-1 edges, where n is the number of vertices in the graph.</li>
+                </ul>
+            </ol>
+            
+            <h3>Visualization of Kruksal's Algorithm:</h3>
+            <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/5c/MST_kruskal_en.gif/480px-MST_kruskal_en.gif" alt="">
+        <h3>Complexity Analysis:</h3>
+        <h4>Time Complexity: </h4>
+            <ul>
+                <li>The overall time complexity is dominated by the sorting step, resulting in O(ElogE) time complexity.</li>
+            </ul>
+        <h4>Space Complexity:</h4>
+            <ul>
+                <li>The space complexity is O(V+E), where V is the number of vertices and E is the number of edges.</li>
+            </ul>
+        <h3>Advantages:</h3>
+            <ul>
+                <li>Kruskal's algorithm produces the optimal MST for a connected, undirected graph with weighted edges.</li>
+                <li>It is efficient, especially when dealing with sparse graphs where E is much less than V <sup>2</sup> .</li>
+            </ul>
+        <h3>Disadvantages:</h3>
+            <ul>
+                <li>Kruskal's algorithm may not be as efficient for dense graphs, where the number of edges is close to V <sup>2</sup></li>
+                <li>The disjoint-set data structure requires additional space, making the space complexity relatively higher.</li>
+            </ul>
+            <div id="nav-toggle">&#9776;</div>
+        </div>
+    </div>
+    <script>
+        document.getElementById('nav-toggle').addEventListener('click', function () {
+            document.getElementById('sidebar').classList.toggle('active');
+        });
+    </script>
+</body>
+</html>

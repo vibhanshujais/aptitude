@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        *{
+            box-sizing: border-box;
+        }
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background-color: white;
+        }
+        .section {
+            padding-left: 10px;
+            text-align: left;
+            background-color: white;
+            width: 90%;
+            float: left;
+            margin: 2% 5% 1% 5% ;
+            border-radius: 10px;
+            box-shadow: 0px 0px 3px 3px rgb(232, 212, 212);
+        }
+        .section:hover{
+            translate: 0px -5px; 
+            box-shadow: 0px 0px 5px 1px rgb(141, 215, 250);
+            text-align: center;
+            cursor: pointer;
+        }
+        a{
+            text-decoration: none;
+            color: black;
+        }
+    </style>
+</head>
+<body>
+    {% include 'header.html' %}
+    {% for i in key %}
+    <a href="{% url 'vocab' topic=i %}">
+        <section class="section">
+            <h2>{{i}}</h2>
+        </section>
+    </a>
+    {% endfor %}
+    <script>
+        function goback(){
+            window.history.back()
+        }
+    </script>
+</body>
+</html>

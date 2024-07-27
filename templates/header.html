@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vibhanshu Jaiswal</title>
+    <style>
+        .header {
+            background-color: black;
+            color: white;
+            display: flex;
+            justify-content: space-between;
+            padding: 1%;
+        }
+        button{
+            padding:1%;
+            background-color: black;
+            color: white;
+            border: 0;
+            font-size: 1.2rem;
+        }
+        button:hover{
+            cursor: pointer;
+        }
+        .home{
+            text-decoration: none;
+            color: white;
+            font-size: 1.2rem;
+            padding-top: 7px;
+        }
+        ::-webkit-scrollbar{
+            width: 10px;
+        }
+        ::-webkit-scrollbar-thumb{
+            background-color: #cccccc;
+            border-radius: 10px;
+        }
+        ::-webkit-scrollbar-thumb:hover{
+            background-color: #555;
+            cursor: pointer;
+            border: 50%;
+        }
+    </style>
+</head>
+<body>
+    <header class="header">
+        <button onclick="goback()">&#8592Back</button>
+        <a class="home" href="/">Home</a>
+    </header>
+    <script>
+        function goback(){
+            window.history.back()
+        }
+    </script>
+</body>
+</html>

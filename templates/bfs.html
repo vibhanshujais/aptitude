@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vibhanshu Jaiswal</title>
+    <meta name="keywords" content="bfs, algo, algorithms, dsa algorihtm, breadth first search">
+    <style>
+        body{
+            margin: 0;
+        }
+            #container {
+                display: flex;
+            }
+            #sidebar {
+                background-color: #333;
+                color: #fff;
+                width: 300px;
+                padding: 20px;
+                box-sizing: border-box;
+                transition: width 0.3s;
+            }
+    
+            #content {
+                flex-grow: 1;
+                padding: 20px;
+                box-sizing: border-box;
+            }
+    
+            #nav-toggle {
+                display: none;
+            }
+            ul{
+                list-style: disc;
+            }
+            li{
+                padding-bottom: 10px ;
+            }
+            a{
+                text-decoration: none;
+                color: white;
+            }
+            img{
+                border: solid 1px black;
+                width: 40%;
+            }
+            #sidebar ul li{
+                list-style: none;
+            }
+    
+            @media screen and (max-width: 768px) {
+                #sidebar {
+                    width: 0;
+                    overflow: hidden;
+                    background-color: white;
+                }
+    
+                #content {
+                    width: 50%;
+                }
+    
+                #sidebar.active {
+                    width: 400px;
+                    border: black solid 1px;
+                }
+                img{
+                width: 90%;
+            }
+                #nav-toggle {
+                    color: black;
+                    display: block;
+                    cursor: pointer;
+                    position:fixed;
+                    top: 20px;
+                    left: 20px;
+                    z-index: 2;
+                    margin-top: 30px;
+                }
+                a{
+                    color: black;
+                }
+            }
+    </style>
+</head>
+<body>
+    {% include 'header.html' %}
+    <div id="container">
+        <div id="sidebar">
+            <ul>
+                {% for i in key %}
+                    <a href="/algorithm/{{i.name}}">
+                        <li>{{i.name}}</li>
+                    </a>
+                    <hr>
+                {% endfor %}
+            </ul>
+        </div>
+    
+        <div id="content">
+            <h1>BFS</h1>
+            <hr>
+            <h3>What is BFS?</h3>
+            <p>BFS stands for Breadth-First Search, which is a graph traversal algorithm used to explore all the vertices of a graph in breadthward motion. It starts at the source vertex and explores its neighbors before moving on to the next level of neighbors. BFS is often used to find the shortest path in an unweighted graph.</p>
+            <h3>How BFS algorithm works?</h3>
+            <ol>
+                <li><b>Initialization:</b></li>
+                <ul>
+                    <li>Create a queue to keep track of the vertices to be visited.</li>
+                    <li>Mark all vertices as not visited.</li>
+                </ul>
+                <li><b>Choose a starting vertex:</b></li>
+                <ul>
+                    <li>Choose a starting vertex (source) and mark it as visited.</li>
+                    <li>Enqueue the starting vertex into the queue.</li>
+                </ul>
+                <li><b>Explore neighbours:</b></li>
+                <ul>
+                    <li>While the queue is not empty, do the following:</li>
+                    <ul>
+                        <li>Dequeue a vertex from the queue.</li>
+                        <li>Process the dequeued vertex.</li>
+                        <li>Enqueue all adjacent vertices that haven't been visited yet.</li>
+                        <li>Mark each newly enqueued vertex as visited.</li>
+                    </ul>
+                </ul>
+                <li><b>Termination:</b></li>
+                <ul>
+                    <li>Continue the process until the queue is empty.</li>
+                </ul>
+            </ol>
+            <h3>Example:</h3>
+            <p>Consider this graph:</p>
+           <pre>
+             A
+            / \
+           B   C
+          / \   \
+         D   E   F
+        </pre>
+        <ol>
+            <li><b>Initialization:</b></li>
+            <ul>
+                <li>Queue: empty</li>
+                <li>Visited: [false, false, false, false, false, false]</li>
+            </ul>
+            <li><b>Starting Vertex:</b></li>
+            <ul>
+                <li>Choose A as the starting vertex.</li>
+                <li>Enqueue A, mark A as visited.</li>
+            </ul>
+            <li><b>Explore neighbors:</b></li>
+            <ul>
+                <li>Dequeue A, process A.</li>
+                <li>Enqueue B and C.</li>
+                <li>Visited: [true, false, false, false, false, false]</li>
+                <li>Dequeue B, process B.</li>
+                <li>Enqueue D and E.</li>
+                <li>Visited: [true, true, false, false, false, false]</li>
+                <li>Dequeue C, process C.</li>
+                <li>Enqueue F.</li>
+                <li>Visited: [true, true, true, false, false, false]</li>
+                <li>Dequeue D, process D.</li>
+                <li>No new vertices to enqueue.</li>
+                <li>Visited: [true, true, true, true, false, false]</li>
+                <li>Dequeue E, process E.</li>
+                <li>No new vertices to enqueue.</li>
+                <li>Visited: [true, true, true, true, true, false]</li>
+                <li>Dequeue F, process F.</li>
+                <li>No new vertices to enqueue.</li>
+                <li>Visited: [true, true, true, true, true, true]</li>
+            </ul>
+            <li><b>Termination:</b></li>
+            <ul>
+                <li>Continue until the queue is empty.</li>
+            </ul>
+        </ol>
+        <h3>Visualization of BFS:</h3>
+        <img src="https://upload.wikimedia.org/wikipedia/commons/5/5d/Breadth-First-Search-Algorithm.gif" alt="BFS">
+        <h3>Complexity Analysis:</h3>
+        <h4>Time Complexity: </h4>
+        <ul>
+            <li>The time complexity of BFS is typically expressed as O(V + E), where V is the number of vertices (nodes) and E is the number of edges in the graph.</li>
+        </ul>
+        <h4>Space Complexity:</h4>
+        <ul>
+            <li>The space complexity of BFS is O(V) for the worst-case scenario, where V is the number of vertices.</li>
+        </ul>
+        <h3>Advantages:</h3>
+        <ul>
+            <li>BFS is well-suited for finding the shortest path in an unweighted graph</li>
+            <li>BFS is complete, meaning it will find a solution (if one exists) in a finite amount of time, given that the graph is finite.</li>
+            <li>BFS typically requires less memory because it only needs to store information</li>
+        </ul>
+        <h3>Disadvantages:</h3>
+        <ul>
+            <li>BFS does not consider edge weights. It is not suitable for finding the shortest path in graphs with weighted edges</li>
+            <li>In sparse graphs, where the number of edges is significantly less than the number of vertices, BFS may explore many vertices that are not on the shortest path. </li>
+        </ul>
+
+            <div id="nav-toggle">&#9776;</div>
+        </div>
+    </div>
+    <script>
+        document.getElementById('nav-toggle').addEventListener('click', function () {
+            document.getElementById('sidebar').classList.toggle('active');
+        });
+    </script>
+</body>
+</html>

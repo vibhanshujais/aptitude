@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+<style>
+    body{
+        margin: 0;
+    }
+        #container {
+            display: flex;
+        }
+
+        #sidebar {
+            background-color: #333;
+            color: #fff;
+            width: 300px;
+            padding: 20px;
+            box-sizing: border-box;
+            transition: width 0.3s;
+        }
+
+        #content {
+            flex-grow: 1;
+            padding: 20px;
+            box-sizing: border-box;
+        }
+
+        #nav-toggle {
+            display: none;
+        }
+
+        ul{
+            list-style: disc;
+        }
+        li{
+            padding-bottom: 10px ;
+         }
+        a{
+            text-decoration: none;
+            color: white;
+        }
+        #sidebar ul li{
+            list-style: none;
+        }
+        img{
+            width: 40%;
+            border: 1px black solid;
+        }
+        @media screen and (max-width: 768px) {
+            #sidebar {
+                width: 0;
+                overflow: hidden;
+                background-color: white;
+            }
+
+            #content {
+                width: 50%;
+            }
+
+            #sidebar.active {
+                width: 400px;
+                border: black solid 1px;
+            }
+
+            #nav-toggle {
+                color: black;
+                display: block;
+                cursor: pointer;
+                position:fixed;
+                top: 20px;
+                left: 20px;
+                z-index: 2;
+                margin-top: 30px;
+            }
+            a{
+                color: black;
+            }
+        }
+</style>
+<body>
+    {% include 'header.html' %}
+<div id="container">
+    <div id="sidebar">
+        <ul>
+            {% for i in key %}
+                <a href="/algorithm/{{i.name}}">
+                    <li>{{i.name}}</li>
+                </a>
+                <hr>
+            {% endfor %}
+        </ul>
+    </div>
+
+    <div id="content">
+        <h1>Merge Sort</h1>
+        <hr>
+        <h3>What is Merge Sort?</h3    >
+        <p>
+            Merge sort is a divide-and-conquer algorithm that works by dividing the input array into smaller, 
+            more manageable subarrays, sorting each subarray recursively, and then merging the sorted subarrays to produce the final sorted array</p>
+        <h3>How Merge sort works?</h3    >
+        <ol>
+            <li><b>Divide:</b></li>
+            <ul>
+                <li>Divide the unsorted array into two halves.</li>
+            </ul>
+            <li><b>Conquer:</b></li>
+            <ul>
+                <li>Recursively sort each half of the array.</li>
+            </ul>
+            <li><b>Merge:</b></li>
+            <ul>
+                <li>Merge the two sorted halves to produce a single sorted array.</li>
+            </ul>
+        </ol>   
+        <h3>Example:</h3    >
+        <p>Consider an initial array: [38, 27, 43, 3, 9, 82, 10] </p>
+        <ol>
+            <li><b>Divide:</b></li>
+            <ul>
+                <li>Split into halves: [38, 27, 43, 3] and [9, 82, 10]</li>
+            </ul>
+            <li><b>Recursively sort:</b></li>
+            <ul>
+                <li>Sort [38, 27, 43, 3]:</li>
+                <ul>
+                    <li>Split into [38, 27] and [43, 3].</li>
+                    <li>Sort [38, 27] to [27, 38].</li>
+                    <li>Sort [43, 3] to [3, 43].</li>
+                    <li>Merge sorted halves: [27, 38, 3, 43].</li>
+                </ul>
+                <li>Sort [9, 82, 10]:</li>
+                <ul>
+                    <li>Split into [9] and [82, 10].</li>
+                    <li>Sort [82, 10] to [10, 82].</li>
+                    <li>Merge sorted halves: [9, 10, 82].</li>
+                </ul>
+            </ul>
+            <li><b>Merge</b></li>
+            <ul>
+                <li>Merge [27, 38, 3, 43] and [9, 10, 82]:</li>
+                <ul>
+                    <li>Compare and merge: [3, 9, 10, 27, 38, 43, 82].</li>
+                </ul>
+            </ul>
+        </ol>
+        <h3>Visualization of Merge Sort:</h3    >
+        <img src="https://upload.wikimedia.org/wikipedia/commons/c/cc/Merge-sort-example-300px.gif" alt="">
+        <h3>Complexity Analysis:</h3    >
+        <h4>Time Complexity:</h4>
+        <ul>
+            <li>O(NlogN), in every case.</li>
+        </ul>
+        <h4>Space Complexity:</h4>
+        <ul>
+            <li>O(N)</li>
+        </ul>
+        <h3>Advantages:</h3    >
+        <ul>
+            <li><b>Stability: </b>Merge sort is a stable sorting algorithm, which means it maintains the relative order of equal elements in the input array.</li>
+            <li><b>Guaranteed worst case:</b> Merge sort has a worst-case time complexity of O(N logN), which means it performs well even on large datasets.</li>
+            <li><b>Parallelizable: </b>Merge sort is a naturally parallelizable algorithm, which means it can be easily parallelized to take advantage of multiple processors or threads.</li>
+        </ul>
+        <h3>Disadvantages:</h3    >
+        <ul>
+            <li><b>Space complexity: </b>Merge sort requires additional memory to store the merged sub-arrays during the sorting process. </li>
+            <li><b>Not in-place: </b>Merge sort is not an in-place sorting algorithm, which means it requires additional memory to store the sorted data. This can be a disadvantage in applications where memory usage is a concern.</li>
+            <li><b>Not optimal for small datasets: </b>For small datasets, Merge sort has a higher time complexity than some other sorting algorithms, such as insertion sort. This can result in slower performance for very small datasets.</li>
+        </ul>
+
+
+        </div>
+
+    <div id="nav-toggle">&#9776;</div>
+</div>
+
+<script>
+    document.getElementById('nav-toggle').addEventListener('click', function () {
+        document.getElementById('sidebar').classList.toggle('active');
+    });
+</script>
+</body>
+</html>

@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+<style>
+    body{
+        margin: 0;
+    }
+        #container {
+            display: flex;
+        }
+        #sidebar {
+            background-color: #333;
+            color: #fff;
+            width: 300px;
+            padding: 20px;
+            box-sizing: border-box;
+            transition: width 0.3s;
+        }
+
+        #content {
+            flex-grow: 1;
+            padding: 20px;
+            box-sizing: border-box;
+        }
+
+        #nav-toggle {
+            display: none;
+        }
+        ul{
+            list-style: disc;
+        }
+        li{
+            padding-bottom: 10px ;
+        }
+        a{
+            text-decoration: none;
+            color: white;
+        }
+        #sidebar ul li{
+            list-style: none;
+        }
+        img{
+            width: 90%;
+            border: 1px solid black;
+        }
+
+        @media screen and (max-width: 768px) {
+            #sidebar {
+                width: 0;
+                overflow: hidden;
+                background-color: white;
+            }
+
+            #content {
+                width: 50%;
+            }
+
+            #sidebar.active {
+                width: 400px;
+                border: black solid 1px;
+            }
+
+            #nav-toggle {
+                color: black;
+                display: block;
+                cursor: pointer;
+                position:fixed;
+                top: 20px;
+                left: 20px;
+                z-index: 2;
+                margin-top: 30px;
+            }
+            a{
+                color: black;
+            }
+        }
+</style>
+<body>
+    {% include 'header.html' %}
+<div id="container">
+    <div id="sidebar">
+        <ul>
+            {% for i in key %}
+                <a href="/algorithm/{{i.name}}">
+                    <li>{{i.name}}</li>
+                </a>
+                <hr>
+            {% endfor %}
+        </ul>
+    </div>
+
+    <div id="content">
+        <h1>Insertion Sort</h1>
+        <hr>
+        <h3>What is Insertion Sort?</h3>
+        <p>Insertion sort is a simple sorting algorithm that builds the final sorted array one element at a time. 
+            It is much less efficient on large lists than more advanced algorithms such as quicksort, heapsort, or merge sort, 
+            but it performs well on small lists or partially sorted lists.</p>
+        <h3>How Insertion Sort works?</h3>
+        <ol>
+            <li><b>Initialization:</b></li>
+            <ul>
+                <li>The first element in the array is considered to be sorted.</li>
+                <li>Start from the second element (index 1) and consider it as the key.</li>
+            </ul>
+            <li><b>Comparison and Insertion:</b></li>
+            <ul>
+                <li>Compare the key with the element to its left.</li>
+                <li>If the key is smaller, swap it with the element to its left.</li>
+                <li>Repeat this process until the key is greater than or equal to the element to its left or until it reaches the beginning of the array.</li>
+            </ul>
+            <li><b>Move to the Next element:</b></li>
+            <ul>
+                <li>Move to the next element in the array (increment the index).</li>
+                <li>Repeat steps 2 and 3 until the entire array is sorted.</li>
+            </ul>
+        </ol>    
+        <h3>Example:</h3>
+        <p>Consider initial array : [7, 4, 5, 2, 1]</p>
+        <ul>
+            <li><b>Pass 1:</b> Swap 7 and 4. Array becomes [4, 7, 5, 2, 1].</li>
+            <li><b>Pass 2:</b> Swap 7 and 5. Array becomes [4, 5, 7, 2, 1].</li>
+            <li><b>Pass 3:</b> Insert 2 in its correct position. Array becomes [2, 4, 5, 7, 1].</li>
+            <li><b>Pass 4:</b> Insert 1 in its correct position. Array becomes [1, 2, 4, 5, 7].</li>
+        </ul>
+        <h3>Visualization of Insertion sort:</h3>
+        <img src="https://upload.wikimedia.org/wikipedia/commons/9/9c/Insertion-sort-example.gif" alt="">
+        <h3>Complexity Analysis:</h3>
+        <h4>Time Complexity:</h4>
+        <ul>
+            <li><b>Best Case:</b>O(N)</li>
+            <li><b>Average Case:</b>O(N<sup>2</sup>)</li>
+            <li><b>Worst Case:</b>O(N<sup>2</sup>)</li>
+        </ul>
+        <h4>Space Complexity:</h4>
+        <ul>
+            <li>O(1)</li>
+        </ul>
+    <h4>Advantages:</h4>
+    <ul>
+        <li>Simple Implementation</li>
+        <li>Efficient for Small Data Sets</li>
+        <li>In-Place Sorting</li>
+    </ul>
+    <h4>Disadvantages:</h4>
+    <ul>
+        <li>Not a Stable Sort</li>
+        <li>Inefficiency for Large Data Sets</li>
+    </ul>
+
+    </div>
+
+    <div id="nav-toggle">&#9776;</div>
+</div>
+
+<script>
+    document.getElementById('nav-toggle').addEventListener('click', function () {
+        document.getElementById('sidebar').classList.toggle('active');
+    });
+</script>
+</body>
+</html>
